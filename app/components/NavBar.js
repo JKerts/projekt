@@ -40,13 +40,9 @@ const NavbarComponent = () => {
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
             ) : (
-              <Link href="/login">
-                <Nav.Link>Login</Nav.Link>
-              </Link>
+                <Nav.Link href="/login">Login</Nav.Link>
             )}
-            <Link href="/profile">
-              <Nav.Link>Profile</Nav.Link>
-            </Link>
+              <Nav.Link href="/profile">Profile</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

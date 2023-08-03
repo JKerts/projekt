@@ -1,10 +1,11 @@
-// pages/addpost.js
+// components/AddPost.js
 
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
 
-const AddPostPage = () => {
+const AddPost = ({
+  close = () => {} // empty callback by default
+}) => {
   const [text, setText] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -12,23 +13,23 @@ const AddPostPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create FormData to send both text and image (if uploaded) to the server
-    const formData = new FormData();
-    formData.append("text", text);
-    if (imageFile) {
-      formData.append("image", imageFile);
-    } else {
-      formData.append("imageURL", imageURL);
-    }
+    const existingPosts = JSON.parse(localStorage.getItem("posts") || "[]");
+    const newPost = {
+      text,
+      imageFile: imageFile || undefined,
+      imageURL,
+      user: sessionStorage.getItem("loggedInUser") || undefined,
+      id: existingPosts.length > 0 ? existingPosts[existingPosts.length -1].id + 1 : 1
+    };
 
     try {
-      // Replace 'YOUR_BACKEND_API_URL' with the actual URL of your backend API endpoint
-      await axios.post("YOUR_BACKEND_API_URL/posts", formData);
+      console.log(localStorage.getItem("posts"));
+      console.log(existingPosts);
+      existingPosts.push(newPost);
+      console.log(existingPosts);
 
-      // Clear the form after successful submission
-      setText("");
-      setImageURL("");
-      setImageFile(null);
+      localStorage.setItem("posts", JSON.stringify(existingPosts));
+      close(); // closing the dialog and refreshing all posts
       alert("Post submitted successfully!");
     } catch (error) {
       console.error("Error submitting post:", error);
@@ -62,9 +63,10 @@ const AddPostPage = () => {
           onChange={(e) => setImageFile(e.target.files[0])}
         />
       </Form.Group>
-      <Button type="submit">Add Post</Button>
+      <Button variant="primary"type="submit">Add Post</Button>
+      <Button onClick={close} variant="secondary">Close</Button>
     </Form>
   );
 };
 
-export default AddPostPage;
+export default AddPost;

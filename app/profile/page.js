@@ -1,7 +1,8 @@
-// pages/profile.js
+// profile/page.js
+"use client";
 
 import React from "react";
-import ProfileView from "../components/ProfileView"; // Make sure to adjust the import path based on your project structure
+import ProfileView from "../components/ProfileView";
 
 const ProfilePage = () => {
   return (
