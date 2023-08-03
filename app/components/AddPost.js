@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
 const AddPost = ({
-  close = () => {} // empty callback by default
+  close = () => {}, // empty callback by default
 }) => {
   const [text, setText] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -19,7 +19,10 @@ const AddPost = ({
       imageFile: imageFile || undefined,
       imageURL,
       user: sessionStorage.getItem("loggedInUser") || undefined,
-      id: existingPosts.length > 0 ? existingPosts[existingPosts.length -1].id + 1 : 1
+      id:
+        existingPosts.length > 0
+          ? existingPosts[existingPosts.length - 1].id + 1
+          : 1,
     };
 
     try {
@@ -63,8 +66,12 @@ const AddPost = ({
           onChange={(e) => setImageFile(e.target.files[0])}
         />
       </Form.Group>
-      <Button variant="primary"type="submit">Add Post</Button>
-      <Button onClick={close} variant="secondary">Close</Button>
+      <Button variant="primary" type="submit">
+        Add Post
+      </Button>
+      <Button onClick={close} variant="secondary">
+        Close
+      </Button>
     </Form>
   );
 };
