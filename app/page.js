@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 
 import mockPosts from "../data/mockData";
 import AddPost from "./components/AddPost";
-import Image from "next/image";
 
 const ADD_MOCK_DATA = true; // toggle ´true´ or ´false´
 
@@ -40,7 +39,7 @@ const HelloWorld = () => {
         {posts.map((post) => (
           <div key={post.id}>
             <p>{post.text}</p>
-            <Image src={post.imageUrl} alt="Post" height={100} width={80} />
+            <img src={post.imageUrl} alt="Post" height={100} width={80} />
           </div>
         ))}
       </div>

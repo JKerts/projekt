@@ -32,7 +32,7 @@ const NavbarComponent = () => {
       <Container>
         <Link href="/">
           <Navbar.Brand className={styles.navbarText}>
-            <Image src="/app/favicon.ico" alt="" width={100} height={30} />
+            <Image src="/favicon.ico" alt="" width={100} height={30} />
             Menstagram - from men, for men!
           </Navbar.Brand>
         </Link>
